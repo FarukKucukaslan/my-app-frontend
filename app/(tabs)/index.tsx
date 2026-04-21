@@ -9,6 +9,7 @@ export default function HomeScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [statusText, setStatusText] = useState('Henüz test edilmedi');
   const [statusCode, setStatusCode] = useState<number | null>(null);
+  const [testPressText, setTestPressText] = useState('');
 
   const runConnectionTest = useCallback(async () => {
     setIsLoading(true);
@@ -53,11 +54,16 @@ export default function HomeScreen() {
       </Pressable>
 
       <Pressable
-        onPress={() => Alert.alert('Test', 'Test butonu calisti.')}
+        onPress={() => {
+          setTestPressText('Test butonuna tiklandi.');
+          Alert.alert('Test', 'Test butonuna tiklandi.');
+        }}
         style={styles.button}
         disabled={isLoading}>
         <ThemedText type="defaultSemiBold">Test Butonu</ThemedText>
       </Pressable>
+
+      {testPressText ? <ThemedText>{testPressText}</ThemedText> : null}
 
       <ThemedView style={styles.infoBox}>
         <ThemedText type="defaultSemiBold">Gerekli ortam degiskenleri</ThemedText>
