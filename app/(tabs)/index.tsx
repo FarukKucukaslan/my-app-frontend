@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, StyleSheet } from 'react-native';
+import { ActivityIndicator, Alert, Pressable, StyleSheet } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -50,6 +50,13 @@ export default function HomeScreen() {
 
       <Pressable onPress={runConnectionTest} style={styles.button} disabled={isLoading}>
         <ThemedText type="defaultSemiBold">Baglantiyi tekrar test et</ThemedText>
+      </Pressable>
+
+      <Pressable
+        onPress={() => Alert.alert('Test', 'Test butonu calisti.')}
+        style={styles.button}
+        disabled={isLoading}>
+        <ThemedText type="defaultSemiBold">Test Butonu</ThemedText>
       </Pressable>
 
       <ThemedView style={styles.infoBox}>
