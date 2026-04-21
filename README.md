@@ -42,6 +42,34 @@ To learn more about developing your project with Expo, look at the following res
 - [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
 - [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
+## Supabase integration (without auth)
+
+This project is already wired to Supabase with a simple connection smoke test.
+
+### 1) Create local environment file
+
+Create a `.env` file in the project root and copy values from `.env.example`:
+
+```bash
+EXPO_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
+EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY=YOUR_SUPABASE_PUBLISHABLE_KEY
+```
+
+You can find these values in Supabase: Project Settings > API.
+
+### 2) Where integration lives
+
+- Supabase client: `lib/supabase.ts`
+- Connection test screen: `app/(tabs)/index.tsx`
+
+### 3) Run app
+
+```bash
+npm run start
+```
+
+When the app opens, the Home screen runs a no-auth connection check and shows the HTTP status.
+
 ## Join the community
 
 Join our community of developers creating universal apps.
