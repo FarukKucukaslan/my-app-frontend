@@ -70,6 +70,59 @@ npm run start
 
 When the app opens, the Home screen runs a no-auth connection check and shows the HTTP status.
 
+## SQL Arena MVP (Supabase)
+
+This repository now includes a first playable SQL-RPG test surface in `app/(tabs)/arena.tsx`.
+
+### What it does
+
+- Loads challenges from `public.challenges`
+- Accepts only `SELECT` queries on the client side
+- Sends the attempt to Supabase Edge Function `submit-sql`
+- Displays hit/critical/xp style game feedback
+
+### Supabase bootstrap
+
+Run the SQL file below in Supabase SQL Editor to create seed tables and initial challenge data:
+
+```bash
+scripts/sql-rpg-supabase.sql
+```
+
+### Edge function contract
+
+The app expects an Edge Function named `submit-sql`:
+
+Function source is included at:
+
+```bash
+supabase/functions/submit-sql/index.ts
+```
+
+Deploy command:
+
+```bash
+supabase functions deploy submit-sql
+```
+
+Request body:
+
+```json
+{ "challengeId": 1, "sql": "SELECT * FROM goblins ORDER BY hp ASC LIMIT 1" }
+```
+
+Response body:
+
+```json
+{
+  "success": true,
+  "feedback": "Dogru sonuc, gobline hasar verdin.",
+  "damage": 35,
+  "critical": true,
+  "xpAwarded": 20
+}
+```
+
 ## Join the community
 
 Join our community of developers creating universal apps.
