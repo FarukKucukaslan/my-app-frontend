@@ -80,6 +80,8 @@ This repository now includes a first playable SQL-RPG test surface in `app/(tabs
 - Accepts only `SELECT` queries on the client side
 - Sends the attempt to Supabase Edge Function `submit-sql`
 - Displays hit/critical/xp style game feedback
+- Includes `Cevaplar` tab where challenge SQL answers can be selected and copied
+- Saves arena results locally and provides an `İstatistikler` tab showing totals (requires @react-native-async-storage/async-storage)
 
 ### Supabase bootstrap
 

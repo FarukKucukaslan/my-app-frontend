@@ -5,6 +5,7 @@ export type Challenge = {
   prompt: string;
   difficulty: 'easy' | 'medium' | 'hard' | string;
   hint: string | null;
+  expectedSignature: string | null;
 };
 
 export type SubmitSqlAttemptResult = {
@@ -45,7 +46,7 @@ export function validateSqlForArena(sqlText: string): { ok: boolean; reason?: st
 export async function getChallenges(limit = 10): Promise<Challenge[]> {
   const { data, error } = await supabase
     .from('challenges')
-    .select('id, prompt, difficulty, hint')
+    .select('id, prompt, difficulty, hint, expected_signature')
     .order('id', { ascending: true })
     .limit(limit);
 
@@ -58,6 +59,7 @@ export async function getChallenges(limit = 10): Promise<Challenge[]> {
     prompt: item.prompt,
     difficulty: item.difficulty,
     hint: item.hint,
+    expectedSignature: item.expected_signature ?? null,
   }));
 }
 

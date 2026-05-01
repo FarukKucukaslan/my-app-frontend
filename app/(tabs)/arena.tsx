@@ -10,6 +10,7 @@ import {
   type Challenge,
   type SubmitSqlAttemptResult,
 } from '@/lib/sql-rpg';
+import { recordAttempt } from '@/lib/storage';
 
 export default function ArenaScreen() {
   const [isLoadingChallenges, setIsLoadingChallenges] = useState(false);
@@ -88,6 +89,13 @@ export default function ArenaScreen() {
       });
 
       setResult(response);
+
+      try {
+        // record locally for stats
+        void recordAttempt(response);
+      } catch (e) {
+        console.warn('Failed to record attempt', e);
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Sorgu gonderilemedi.';
       setErrorText(message);
